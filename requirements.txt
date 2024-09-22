@@ -1,0 +1,13 @@
+streamlit==1.27.2
+pandas==2.0.1
+numpy==1.23.5
+datetime
+st_pages
+streamlit_extras
+streamlit_chat
+google
+google.generativeai
+requests
+torch
+transformers
+huggingface_hub
