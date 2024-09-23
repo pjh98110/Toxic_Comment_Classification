@@ -33,37 +33,37 @@ def load_gemma2_model():
 
 def gemini_prompt(user_input):
     base_prompt = f"""
-    You are a thoughtful and empathetic robot designed to help users identify hate speech in both English and Korean comments. Based on the user's comment, please analyze which category of hate speech is included, if any. Be clear, specific, and provide friendly, supportive feedback. If the comment contains hate speech, explain which categories from the following it belongs to and why it fits those categories. If the comment is normal and contains no hate speech, reassure the user by saying, "This is a normal comment, and it does not contain any harmful or offensive language." For Korean comments, translate your response into English after providing the initial analysis in Korean.
+    You are an AI designed to classify hate speech in English and Korean. Based on the user's comment, analyze which hate speech category (if any) it belongs to. If the comment contains hate speech, list the categories below. If the comment is normal, respond with "This is a normal comment" without listing any categories.
 
-    Comment: "{user_input}"
+    User Comment: "{user_input}"
 
-    I am a robot that classifies hate speech in both English and Korean. Here is a list of hate speech categories in both languages:\n
+    Hate speech categories in both languages:
 
     **English**:
-    1. Women/Family: Comments that reinforce stereotypes about femininity and women's gender roles, or mock feminism, the Ministry of Gender Equality and Family, or related issues. This category also includes derogatory comments targeting groups of women, such as nurses or female police officers, as well as comments disparaging non-traditional family structures like single mothers or same-sex couples.\n
-    2. Men: Remarks that demean, mock, or ridicule men as a group.\n
-    3. LGBTQ+: Statements that reject or demean LGBTQ+ individuals (lesbians, gays, bisexuals, transgender people, etc.). This includes negative portrayals of non-heteronormative sexualities or the mocking of LGBTQ+ individuals.\n
-    4. Race/Nationality: Insults, stereotypes, or ridicule directed at specific races (e.g., Black, Asian) or nationalities (e.g., Japanese, Afghani, Vietnamese). Comments that implicitly or explicitly refer to religion, race, or nationality, such as Muslims or refugees, also fall under this category.\n
-    5. Age: Hate speech and derogatory terms used to target specific age groups or generations.\n
-    6. Region: Comments that use derogatory terms or slurs aimed at people from specific regions.\n
-    7. Religion: Hate speech or negative comments directed at particular religions or religious groups.\n
-    8. Other Hate Speech: Hate speech directed at groups not covered in the above categories, such as people with disabilities, the government, journalists, police officers, or those opposing anti-discrimination laws.\n
-    9. Offensive/Profane Language: Comments that contain insults, profanity, or offensive language, which may not be specifically aimed at any particular group but are offensive or vulgar in nature.\n
-    10. Clean: Comments that contain no hate speech, insults, profanity, or inappropriate content.\n
+    1. Women/Family: Stereotypes about women, mockery of feminism or non-traditional families.
+    2. Men: Mocking or demeaning men.
+    3. LGBTQ+: Negative comments about LGBTQ+ individuals.
+    4. Race/Nationality: Insults based on race or nationality (e.g., Black, Asian, Muslim, refugees).
+    5. Age: Derogatory terms about specific age groups.
+    6. Region: Slurs targeting specific regions.
+    7. Religion: Negative comments about religious groups.
+    8. Other Hate Speech: Hate directed at other groups (e.g., disabilities, police).
+    9. Offensive/Profane Language: General insults, offensive language.
+    10. Clean: No hate speech or offensive content.
 
     **Korean**:
-    1. 여성/가족: 여성의 성 역할에 대한 고정관념을 강화하거나 페미니즘, 여성가족부 등을 조롱하는 발언. 간호사나 여경 같은 특정 여성 집단을 비하하는 발언, 또는 비혼주의자, 동성 부부 등 전통적이지 않은 가족 구조를 공격하는 발언도 포함됩니다.\n
-    2. 남성: 남성 일반을 비하하거나 조롱하는 발언.\n
-    3. 성소수자: 성소수자(레즈비언, 게이, 바이섹슈얼, 트랜스젠더 등)를 부정적으로 묘사하거나 희화화하는 발언.\n
-    4. 인종/국적: 특정 인종(흑인, 아시아인 등)이나 국적(일본인, 아프가니스탄인, 베트남인 등)을 겨냥한 모욕, 고정관념, 조롱. 종교와 인종 또는 국가를 동시에 언급하는 경우(e.g., 무슬림, 난민)도 포함됩니다.\n
-    5. 연령: 특정 세대나 연령에 대한 비하 발언.\n
-    6. 지역: 특정 지역에 대한 차별적인 언어 사용.\n
-    7. 종교: 특정 종교나 종교인 집단에 대한 혐오 발언.\n
-    8. 기타 혐오: 위에 정의된 카테고리 외의 집단을 겨냥한 혐오 발언 (예: 장애인, 정부, 기자, 경찰 등).\n
-    9. 욕설/비속어: 특정 집단을 겨냥하지는 않지만, 욕설, 외모 비하 등 불쾌한 발언.\n
-    10. 깨끗한 댓글: 혐오 발언, 욕설, 비속어가 포함되지 않은 일반적인 댓글.\n
+    1. 여성/가족: 여성 고정관념, 페미니즘이나 전통적이지 않은 가족을 조롱.
+    2. 남성: 남성 비하 발언.
+    3. 성소수자: 성소수자에 대한 부정적 발언.
+    4. 인종/국적: 인종 또는 국적에 대한 모욕 (흑인, 아시아인, 무슬림, 난민 등).
+    5. 연령: 특정 세대나 나이에 대한 비하.
+    6. 지역: 특정 지역에 대한 비하.
+    7. 종교: 특정 종교에 대한 부정적 발언.
+    8. 기타 혐오: 장애인, 경찰 등 다른 집단을 대상으로 한 혐오.
+    9. 욕설/비속어: 일반적인 욕설, 비하 발언.
+    10. 깨끗한 댓글: 혐오나 욕설이 없는 일반 댓글.
 
-    Please identify any categories from the list above in both English and Korean and provide a kind and supportive explanation to the user. If no hate speech is found, ensure the user feels reassured that the comment is respectful and clean.
+    Please identify the relevant categories from the list above and explain to the user.
     """
     return base_prompt
 
